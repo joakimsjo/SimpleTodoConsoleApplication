@@ -3,12 +3,16 @@ using System.IO;
 using application;
 using Newtonsoft.Json;
 
-namespace application {
+namespace application 
+{
 
     public class Todo : ITodo
     {   
         ITodoList _list;
-
+        private readonly string HelpString = "To add elements to the todo list type:\n"
+                                            + "Add <Description of what should be done>\n"
+                                            + "Mark element as done:\nDo #<Id of todo element>\n"
+                                            + "Print all remaining to-dos:\nPrint";
         public Todo(ITodoList list) 
         {
             _list = list;
@@ -29,12 +33,13 @@ namespace application {
                 case "Print":
                     _list.PrintElements();
                     break;
+                case "Help":
+                    Console.WriteLine(HelpString);
+                    break;
                 default:
                     Console.WriteLine("Unkown action");
                     break;
             }
         }
-
-        
     }
 }
