@@ -5,18 +5,20 @@ using Newtonsoft.Json;
 
 namespace application {
 
-    public class ToDo : IToDo
+    public class Todo : ITodo
     {   
-        ToDoList _list;
+        ITodoList _list;
 
-        public ToDo() {
-            _list = new ToDoList();
+        public Todo(ITodoList list) 
+        {
+            _list = list;
         }
         public void DoAction(string action)
         {
             string[] splitted = action.Split(" ", 2);
 
-            switch(splitted[0]) {
+            switch(splitted[0]) 
+            {
                 case "Add":
                     _list.AddElement(splitted[1]);
                     break;

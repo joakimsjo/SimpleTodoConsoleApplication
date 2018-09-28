@@ -4,7 +4,7 @@ namespace application {
     /// <summary>
     /// A todo element.
     /// </summary>
-    public interface IToDoElement {
+    public interface ITodoElement {
         /// <summary>
         /// Get name of todo element
         /// </summary>

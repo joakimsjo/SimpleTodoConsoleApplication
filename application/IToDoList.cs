@@ -5,7 +5,7 @@ namespace application {
     /// A todo list.
     /// Has todo elemens.
     /// </summary>
-    public interface IToDoList {
+    public interface ITodoList {
         /// <summary>
         /// Add a new todo element to the list
         /// </summary>

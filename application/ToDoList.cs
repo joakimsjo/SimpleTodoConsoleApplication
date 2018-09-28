@@ -3,23 +3,28 @@ using System.Collections.Generic;
 using System.IO;
 using Newtonsoft.Json;
 
-namespace application {
+namespace application
+{
 
-    public class ToDoList : IToDoList
+    public class TodoList : ITodoList
     {
-        List<ToDoElement> _elements;
+        List<ITodoElement> _elements;
 
-        public ToDoList() {
-            if(File.Exists("data.json")) {
+        public TodoList()
+        {
+            if (File.Exists("data.json"))
+            {
                 Load();
-            } else {
-                _elements = new List<ToDoElement>();
+            }
+            else
+            {
+                _elements = new List<ITodoElement>();
             }
         }
         public void AddElement(string description)
         {
             int id = _elements.Count;
-            ToDoElement newTodo = new ToDoElement(id, description);
+            ITodoElement newTodo = new TodoElement(id, description);
             _elements.Add(newTodo);
             Save();
             Console.WriteLine(newTodo);
@@ -29,13 +34,15 @@ namespace application {
         {
             int id = Int32.Parse(s);
 
-            if(id > _elements.Count) {
+            if (id > _elements.Count)
+            {
                 return;
             }
 
-            ToDoElement elementToComplete = _elements[id];
+            ITodoElement elementToComplete = _elements[id];
 
-            if(elementToComplete.IsDone()) {
+            if (elementToComplete.IsDone())
+            {
                 return;
             }
             elementToComplete.MarkAsDone();
@@ -45,22 +52,31 @@ namespace application {
 
         public void PrintElements()
         {
-            foreach(ToDoElement element in _elements) {
+            foreach (ITodoElement element in _elements)
+            {
                 Console.WriteLine(element);
             }
         }
         public void Load()
         {
-            using (StreamReader file = new StreamReader("data.json")) {
+            using (StreamReader file = new StreamReader("data.json"))
+            {
                 string r = file.ReadToEnd();
-                _elements = JsonConvert.DeserializeObject<List<ToDoElement>>(r);
+                JsonConverter[] converters = {new TodoElementConverter()};
+
+                _elements = JsonConvert.DeserializeObject<List<ITodoElement>>(r, converters: converters);
+                
             }
         }
 
         public void Save()
         {
-            using (StreamWriter file = new StreamWriter("data.json")) {
-                string data = JsonConvert.SerializeObject(_elements);
+            using (StreamWriter file = new StreamWriter("data.json"))
+            {
+                var settings = new JsonSerializerSettings();
+                settings.TypeNameHandling = TypeNameHandling.Objects;
+
+                string data = JsonConvert.SerializeObject(_elements, formatting: Formatting.Indented, settings: settings);
                 file.Write(data);
             }
         }

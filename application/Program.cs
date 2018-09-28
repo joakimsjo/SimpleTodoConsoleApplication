@@ -7,13 +7,13 @@ namespace application
         static void Main(string[] args)
         {
             Console.WriteLine("Welcome to this simple to do application!");
-            ToDo app = new ToDo();
+            Todo app = new Todo(new TodoList());
 
-            while(true) {
+            while(true) 
+            {
                 string command = Console.ReadLine();
                 app.DoAction(command);
             }
-            
         }
     }
 }
