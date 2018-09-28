@@ -17,6 +17,7 @@ namespace application
         {
             _list = list;
         }
+        
         public void DoAction(string action)
         {
             string[] splitted = action.Split(" ", 2);
