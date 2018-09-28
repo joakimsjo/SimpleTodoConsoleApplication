@@ -21,6 +21,12 @@ namespace application
         {
             string[] splitted = action.Split(" ", 2);
 
+            if ((splitted[0] == "Add" || splitted[0] == "Do") && (splitted.Length != 2 || splitted[1].Length == 0))
+            {
+                Console.WriteLine("Second argument is missing");
+                return;
+            }
+
             switch(splitted[0]) 
             {
                 case "Add":

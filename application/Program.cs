@@ -12,6 +12,7 @@ namespace application
 
             while(true) 
             {
+                Console.Write(">");
                 string command = Console.ReadLine();
                 app.DoAction(command);
             }
