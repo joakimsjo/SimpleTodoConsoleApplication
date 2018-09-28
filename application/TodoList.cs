@@ -107,7 +107,7 @@ namespace application
                 catch (JsonSerializationException e)
                 {
                     Console.WriteLine(string.Format(ErrorFormatString, e.Message));
-                    Console.WriteLine("Failed to save:\n");
+                    Console.WriteLine(string.Format(ErrorFormatString, "Failed to save. Dumping elements in console"));
 
                     foreach (ITodoElement TodoElement in _elements)
                     {
