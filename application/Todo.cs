@@ -8,8 +8,9 @@ namespace application
         public ITodoList _list;
         private readonly string HelpString = "To add elements to the todo list type:\n"
                                             + "Add <Description of what should be done>\n"
-                                            + "Mark element as done:\nDo #<Id of todo element>\n"
-                                            + "Print all remaining to-dos:\nPrint";
+                                            + "To mark element as done type:\nDo #<Id of todo element>\n"
+                                            + "Print all remaining to-dos type:\nPrint\n"
+                                            + "To exit the application type:\nQuit";
         private readonly string InfoFormatString = "INFO: {0}";
         private static List<string> ActionVerbs = new List<string>(new string[] {"ADD", "DO"});
 
@@ -44,6 +45,9 @@ namespace application
                     break;
                 case "HELP":
                     Console.WriteLine(HelpString);
+                    break;
+                case "QUIT":
+                    System.Environment.Exit(1);
                     break;
                 default:
                     Console.WriteLine("Unkown action. Type 'Help' for available actions.");

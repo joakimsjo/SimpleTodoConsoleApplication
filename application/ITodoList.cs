@@ -11,18 +11,19 @@ namespace application
         /// <summary>
         /// Add a new todo element to the list
         /// </summary>
-        /// <param name="description"> Description of what should be done </param>
+        /// <param name="description"> Description of what should be done</param>
         void AddElement(string description);
 
         /// <summary>
         /// Marks a element as done
         /// </summary>
-        /// <param name="id"> Id of the todo element to be marked as done </param>
+        /// <param name="id"> Id of the todo element to be marked as done</param>
         void DoElement(string id);
 
         /// <summary>
         /// Returns the number of todos in list
         /// </summary>
+        /// <returns>Returns size of list.</returns>
         int GetSize();
 
         /// <summary>
@@ -41,8 +42,10 @@ namespace application
         void Load();
 
         /// <summary>
-        /// Returns an array of all Todo elements in list.
+        /// Returns an array of all Todo elements in list
         /// </summary>
+        /// <returns>Returns array of all elements in list</returns>
+
         ITodoElement[] GetTodoElements();
     }
 

@@ -10,6 +10,7 @@ namespace application
         /// <summary>
         /// Get name of todo element
         /// </summary>
+        /// <returns>Returns description of element</returns>
         string GetDescription();
 
         /// <summary>
@@ -20,6 +21,7 @@ namespace application
         /// <summary>
         /// Indicates if a element is completed
         /// </summary>
+        /// <returns>Returns boolean indicating if element is done</returns>
         bool IsDone();
     }
 }

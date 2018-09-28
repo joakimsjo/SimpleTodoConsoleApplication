@@ -39,7 +39,17 @@ namespace application
 
         public void DoElement(string s)
         {
-            int id = Int32.Parse(s);
+            int id;
+
+            try 
+            {
+                id = Int32.Parse(s);
+            }
+            catch (FormatException)
+            {
+                Console.WriteLine(string.Format(InfoFormatString, $"{s} is not a valid todo ID. Id must be an integer."));
+                return;
+            }   
 
             if (id > elements.Count)
             {
@@ -91,10 +101,10 @@ namespace application
                 {
                     elements = JsonConvert.DeserializeObject<List<ITodoElement>>(r, converters: converters);
                 }
-                catch (JsonSerializationException e)
+                catch (JsonReaderException e)
                 {
                     Console.WriteLine(string.Format(ErrorFormatString, e.Message));
-                    Console.WriteLine("Creating new todo list");
+                    Console.WriteLine(string.Format(ErrorFormatString, "Could not load saved list. Creating new todo list"));
                     elements = new List<ITodoElement>();
                 }
             }
@@ -112,7 +122,7 @@ namespace application
                     string data = JsonConvert.SerializeObject(elements, formatting: Formatting.Indented, settings: settings);
                     file.Write(data);
                 }
-                catch (JsonSerializationException e)
+                catch (JsonWriterException e)
                 {
                     Console.WriteLine(string.Format(ErrorFormatString, e.Message));
                     Console.WriteLine(string.Format(ErrorFormatString, "Failed to save. Dumping elements in console"));
