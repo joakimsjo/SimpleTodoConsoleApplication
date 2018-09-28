@@ -1,10 +1,12 @@
 using System;
 
-namespace application {
+namespace application 
+{
     /// <summary>
     /// A todo element.
     /// </summary>
-    public interface ITodoElement {
+    public interface ITodoElement 
+    {
         /// <summary>
         /// Get name of todo element
         /// </summary>

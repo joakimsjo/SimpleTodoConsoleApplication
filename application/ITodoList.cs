@@ -1,11 +1,13 @@
 using System;
 
-namespace application {
+namespace application 
+{
     /// <summary>
     /// A todo list.
     /// Has todo elemens.
     /// </summary>
-    public interface ITodoList {
+    public interface ITodoList 
+    {
         /// <summary>
         /// Add a new todo element to the list
         /// </summary>

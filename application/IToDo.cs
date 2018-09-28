@@ -1,10 +1,12 @@
 using System;
 
-namespace application {
+namespace application 
+{
     /// <summary>
     /// A todo class.
     /// </summary>
-    public interface ITodo {
+    public interface ITodo 
+    {
         /// <summary>
         /// Performes an action on the ToDoList
         /// </summary>

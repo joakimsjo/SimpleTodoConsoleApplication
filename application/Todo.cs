@@ -1,7 +1,5 @@
 using System;
-using System.IO;
-using application;
-using Newtonsoft.Json;
+using System.Collections.Generic;
 
 namespace application
 {
@@ -12,6 +10,8 @@ namespace application
                                             + "Add <Description of what should be done>\n"
                                             + "Mark element as done:\nDo #<Id of todo element>\n"
                                             + "Print all remaining to-dos:\nPrint";
+        private readonly string InfoFormatString = "INFO: {0}";
+        private static List<string> ActionVerbs = new List<string>(new string[] {"ADD", "DO"});
 
         public Todo(ITodoList list)
         {
@@ -20,31 +20,33 @@ namespace application
         
         public void DoAction(string action)
         {
-            string[] splitted = action.Split(" ", 2);
+            string[] args = action.Split(" ", 2);
 
-            if ((splitted[0] == "Add" || splitted[0] == "Do") && (splitted.Length != 2 || splitted[1].Length == 0))
+            string Verb = args[0].ToUpper();
+            
+            if (ActionVerbs.Contains(Verb) && (args.Length < 2 || args[1].Trim().Length < 1)) 
             {
-                Console.WriteLine("Second argument is missing");
+                Console.WriteLine(string.Format(InfoFormatString, $"{Verb} is missing second argument."));
                 return;
             }
 
-            switch (splitted[0])
+            switch (Verb)
             {
-                case "Add":
-                    _list.AddElement(splitted[1]);
+                case "ADD":
+                    _list.AddElement(args[1]);
                     break;
-                case "Do":
-                    string RemovedHashTag = splitted[1].Replace("#", string.Empty);
+                case "DO":
+                    string RemovedHashTag = args[1].Replace("#", string.Empty);
                     _list.DoElement(RemovedHashTag);
                     break;
-                case "Print":
+                case "PRINT":
                     _list.PrintElements();
                     break;
-                case "Help":
+                case "HELP":
                     Console.WriteLine(HelpString);
                     break;
                 default:
-                    Console.WriteLine("Unkown action");
+                    Console.WriteLine("Unkown action. Type 'Help' for available actions.");
                     break;
             }
         }
