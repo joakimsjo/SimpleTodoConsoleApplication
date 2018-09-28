@@ -5,7 +5,7 @@ namespace application
 {
     public class Todo : ITodo
     {
-        ITodoList _list;
+        public ITodoList _list;
         private readonly string HelpString = "To add elements to the todo list type:\n"
                                             + "Add <Description of what should be done>\n"
                                             + "Mark element as done:\nDo #<Id of todo element>\n"
