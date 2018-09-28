@@ -15,5 +15,9 @@ namespace application {
         /// </summary>
         void MarkAsDone();
 
+        /// <summary>
+        /// Indicates if a element is completed
+        /// </summary>
+        bool IsDone();
     }
 }
