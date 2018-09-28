@@ -7,7 +7,9 @@ namespace application
 {
     public class TodoList : ITodoList
     {
-        private readonly string ErrorFormatString = "ERROR: {0}" + Environment.NewLine;
+        private readonly string ErrorFormatString = "ERROR: {0}";
+        private readonly string InfoFormatString = "INFO: {0}";
+
         List<ITodoElement> _elements;
 
         public TodoList()
@@ -40,6 +42,7 @@ namespace application
 
             if (id > _elements.Count)
             {
+                Console.WriteLine(string.Format(InfoFormatString, "Id is not in list."));
                 return;
             }
 
@@ -47,13 +50,14 @@ namespace application
 
             if (elementToComplete.IsDone())
             {
+                Console.WriteLine(string.Format(InfoFormatString, "Todo element is already marked as done."));
                 return;
             }
 
             elementToComplete.MarkAsDone();
 
             Console.WriteLine("Completed {0}", elementToComplete);
-            
+
             Save();
         }
 
@@ -61,7 +65,7 @@ namespace application
         {
             foreach (ITodoElement element in _elements)
             {
-                if (!element.IsDone()) 
+                if (!element.IsDone())
                 {
                     Console.WriteLine(element);
                 }
@@ -78,8 +82,8 @@ namespace application
                 try
                 {
                     _elements = JsonConvert.DeserializeObject<List<ITodoElement>>(r, converters: converters);
-                } 
-                catch (JsonSerializationException e) 
+                }
+                catch (JsonSerializationException e)
                 {
                     Console.WriteLine(string.Format(ErrorFormatString, e.Message));
                     Console.WriteLine("Creating new todo list");
@@ -95,17 +99,17 @@ namespace application
                 var settings = new JsonSerializerSettings();
                 settings.TypeNameHandling = TypeNameHandling.Objects;
 
-                try 
+                try
                 {
                     string data = JsonConvert.SerializeObject(_elements, formatting: Formatting.Indented, settings: settings);
                     file.Write(data);
-                } 
-                catch (JsonSerializationException e) 
+                }
+                catch (JsonSerializationException e)
                 {
                     Console.WriteLine(string.Format(ErrorFormatString, e.Message));
                     Console.WriteLine("Failed to save:\n");
 
-                    foreach(ITodoElement TodoElement in _elements) 
+                    foreach (ITodoElement TodoElement in _elements)
                     {
                         Console.WriteLine(TodoElement);
                     }
