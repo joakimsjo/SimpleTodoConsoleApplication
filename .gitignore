@@ -16,7 +16,7 @@
 data.json
 # User-specific files (MonoDevelop/Xamarin Studio)
 *.userprefs
-
+test-explorer/
 # Build results
 [Dd]ebug/
 [Dd]ebugPublic/
