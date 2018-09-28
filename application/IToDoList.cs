@@ -16,11 +16,23 @@ namespace application {
         /// Marks a element as done
         /// </summary>
         /// <param name="id"> Id of the todo element to be marked as done </param>
-        void DoElement(int id);
+        void DoElement(string id);
 
         /// <summary>
         /// Prints todo elemens that is not marked as done
         /// </summary>
         void PrintElements();
+
+        /// <summary>
+        /// Saves the list of todo elements to a JSON file.
+        /// </summary>
+        void Save();
+    
+
+        /// <summary>
+        /// Loads a JSON file with elements if it exists.
+        /// </summary>
+        void Load();
     }
+
 }
