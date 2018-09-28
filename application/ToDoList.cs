@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
-using application;
 using Newtonsoft.Json;
 
 namespace application {
@@ -20,18 +19,35 @@ namespace application {
         public void AddElement(string description)
         {
             int id = _elements.Count;
-            ToDoElement newTodoElemen = new ToDoElement();
+            ToDoElement newTodo = new ToDoElement(id, description);
+            _elements.Add(newTodo);
+            Save();
+            Console.WriteLine(newTodo);
         }
 
-        public void DoElement(string id)
+        public void DoElement(string s)
         {
-            throw new NotImplementedException();
-        }
+            int id = Int32.Parse(s);
 
+            if(id > _elements.Count) {
+                return;
+            }
+
+            ToDoElement elementToComplete = _elements[id];
+
+            if(elementToComplete.IsDone()) {
+                return;
+            }
+            elementToComplete.MarkAsDone();
+            Console.WriteLine("Completed {0}", elementToComplete);
+            Save();
+        }
 
         public void PrintElements()
         {
-            throw new NotImplementedException();
+            foreach(ToDoElement element in _elements) {
+                Console.WriteLine(element);
+            }
         }
         public void Load()
         {
@@ -43,9 +59,9 @@ namespace application {
 
         public void Save()
         {
-            using (StreamWriter file = File.CreateText("data.json")) {
-                JsonSerializer serializer = new JsonSerializer();
-                serializer.Serialize(file, file);
+            using (StreamWriter file = new StreamWriter("data.json")) {
+                string data = JsonConvert.SerializeObject(_elements);
+                file.Write(data);
             }
         }
     }
