@@ -27,7 +27,6 @@ namespace application {
         /// Saves the list of todo elements to a JSON file.
         /// </summary>
         void Save();
-    
 
         /// <summary>
         /// Loads a JSON file with elements if it exists.
