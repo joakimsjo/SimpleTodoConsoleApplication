@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using Newtonsoft.Json;
 
 namespace application
@@ -63,6 +64,13 @@ namespace application
 
         public void PrintElements()
         {
+            bool allDone = !elements.Any(element => element.IsDone() == false);
+
+            if(allDone)
+            {
+                Console.WriteLine(string.Format(InfoFormatString, "All elements is marked as done."));
+            }
+
             foreach (ITodoElement element in elements)
             {
                 if (!element.IsDone())
