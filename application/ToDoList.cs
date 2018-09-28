@@ -5,9 +5,9 @@ using Newtonsoft.Json;
 
 namespace application
 {
-
     public class TodoList : ITodoList
     {
+        private readonly string ErrorFormatString = "ERROR: {0}" + Environment.NewLine;
         List<ITodoElement> _elements;
 
         public TodoList()
@@ -21,12 +21,16 @@ namespace application
                 _elements = new List<ITodoElement>();
             }
         }
+
         public void AddElement(string description)
         {
             int id = _elements.Count;
             ITodoElement newTodo = new TodoElement(id, description);
+
             _elements.Add(newTodo);
+
             Save();
+
             Console.WriteLine(newTodo);
         }
 
@@ -45,8 +49,11 @@ namespace application
             {
                 return;
             }
+
             elementToComplete.MarkAsDone();
+
             Console.WriteLine("Completed {0}", elementToComplete);
+            
             Save();
         }
 
@@ -54,18 +61,30 @@ namespace application
         {
             foreach (ITodoElement element in _elements)
             {
-                Console.WriteLine(element);
+                if (!element.IsDone()) 
+                {
+                    Console.WriteLine(element);
+                }
             }
         }
+
         public void Load()
         {
             using (StreamReader file = new StreamReader("data.json"))
             {
                 string r = file.ReadToEnd();
-                JsonConverter[] converters = {new TodoElementConverter()};
+                JsonConverter[] converters = { new TodoElementConverter() };
 
-                _elements = JsonConvert.DeserializeObject<List<ITodoElement>>(r, converters: converters);
-                
+                try
+                {
+                    _elements = JsonConvert.DeserializeObject<List<ITodoElement>>(r, converters: converters);
+                } 
+                catch (JsonSerializationException e) 
+                {
+                    Console.WriteLine(string.Format(ErrorFormatString, e.Message));
+                    Console.WriteLine("Creating new todo list");
+                    _elements = new List<ITodoElement>();
+                }
             }
         }
 
@@ -76,8 +95,21 @@ namespace application
                 var settings = new JsonSerializerSettings();
                 settings.TypeNameHandling = TypeNameHandling.Objects;
 
-                string data = JsonConvert.SerializeObject(_elements, formatting: Formatting.Indented, settings: settings);
-                file.Write(data);
+                try 
+                {
+                    string data = JsonConvert.SerializeObject(_elements, formatting: Formatting.Indented, settings: settings);
+                    file.Write(data);
+                } 
+                catch (JsonSerializationException e) 
+                {
+                    Console.WriteLine(string.Format(ErrorFormatString, e.Message));
+                    Console.WriteLine("Failed to save:\n");
+
+                    foreach(ITodoElement TodoElement in _elements) 
+                    {
+                        Console.WriteLine(TodoElement);
+                    }
+                }
             }
         }
     }

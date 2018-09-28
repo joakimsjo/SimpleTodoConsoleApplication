@@ -4,7 +4,6 @@ using Newtonsoft.Json.Linq;
 
 namespace application
 {
-
     public class TodoElement : ITodoElement
     {
         private readonly string formatString = "#{0} {1}";
@@ -35,10 +34,12 @@ namespace application
         {
             return _done;
         }
+
         public string GetId()
         {
             return _id.ToString();
         }
+
         public string GetDescription()
         {
             return _description;
