@@ -10,7 +10,7 @@ namespace application
         private readonly string ErrorFormatString = "ERROR: {0}";
         private readonly string InfoFormatString = "INFO: {0}";
 
-        List<ITodoElement> _elements;
+        public List<ITodoElement> elements;
 
         public TodoList()
         {
@@ -20,16 +20,16 @@ namespace application
             }
             else
             {
-                _elements = new List<ITodoElement>();
+                elements = new List<ITodoElement>();
             }
         }
 
         public void AddElement(string description)
         {
-            int id = _elements.Count;
+            int id = elements.Count;
             ITodoElement newTodo = new TodoElement(id, description);
 
-            _elements.Add(newTodo);
+            elements.Add(newTodo);
 
             Save();
 
@@ -40,13 +40,13 @@ namespace application
         {
             int id = Int32.Parse(s);
 
-            if (id > _elements.Count)
+            if (id > elements.Count)
             {
                 Console.WriteLine(string.Format(InfoFormatString, "Id is not in list."));
                 return;
             }
 
-            ITodoElement elementToComplete = _elements[id];
+            ITodoElement elementToComplete = elements[id];
 
             if (elementToComplete.IsDone())
             {
@@ -63,7 +63,7 @@ namespace application
 
         public void PrintElements()
         {
-            foreach (ITodoElement element in _elements)
+            foreach (ITodoElement element in elements)
             {
                 if (!element.IsDone())
                 {
@@ -81,13 +81,13 @@ namespace application
 
                 try
                 {
-                    _elements = JsonConvert.DeserializeObject<List<ITodoElement>>(r, converters: converters);
+                    elements = JsonConvert.DeserializeObject<List<ITodoElement>>(r, converters: converters);
                 }
                 catch (JsonSerializationException e)
                 {
                     Console.WriteLine(string.Format(ErrorFormatString, e.Message));
                     Console.WriteLine("Creating new todo list");
-                    _elements = new List<ITodoElement>();
+                    elements = new List<ITodoElement>();
                 }
             }
         }
@@ -101,7 +101,7 @@ namespace application
 
                 try
                 {
-                    string data = JsonConvert.SerializeObject(_elements, formatting: Formatting.Indented, settings: settings);
+                    string data = JsonConvert.SerializeObject(elements, formatting: Formatting.Indented, settings: settings);
                     file.Write(data);
                 }
                 catch (JsonSerializationException e)
@@ -109,12 +109,22 @@ namespace application
                     Console.WriteLine(string.Format(ErrorFormatString, e.Message));
                     Console.WriteLine(string.Format(ErrorFormatString, "Failed to save. Dumping elements in console"));
 
-                    foreach (ITodoElement TodoElement in _elements)
+                    foreach (ITodoElement TodoElement in elements)
                     {
                         Console.WriteLine(TodoElement);
                     }
                 }
             }
+        }
+
+        public int GetSize()
+        {
+            return elements.Count;
+        }
+
+        public ITodoElement[] GetTodoElements()
+        {
+            return elements.ToArray();
         }
     }
 }

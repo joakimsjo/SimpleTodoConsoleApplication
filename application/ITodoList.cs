@@ -21,19 +21,29 @@ namespace application
         void DoElement(string id);
 
         /// <summary>
+        /// Returns the number of todos in list
+        /// </summary>
+        int GetSize();
+
+        /// <summary>
         /// Prints todo elemens that is not marked as done
         /// </summary>
         void PrintElements();
 
         /// <summary>
-        /// Saves the list of todo elements to a JSON file.
+        /// Saves the list of todo elements to a JSON file
         /// </summary>
         void Save();
 
         /// <summary>
-        /// Loads a JSON file with elements if it exists.
+        /// Loads a JSON file with elements if it exists
         /// </summary>
         void Load();
+
+        /// <summary>
+        /// Returns an array of all Todo elements in list.
+        /// </summary>
+        ITodoElement[] GetTodoElements();
     }
 
 }
