@@ -32,7 +32,7 @@ namespace Application
                 return;
             }
 
-            if(ActionVerbs.Contains(verb) && IncompleteDescription.Contains(args[1]))
+            if (ActionVerbs.Contains(verb) && IncompleteDescription.Contains(args[1]))
             {
                 Console.WriteLine(string.Format(InfoFormatString, $"{args[1]} is a incomplete description."));
                 return;

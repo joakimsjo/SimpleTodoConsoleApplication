@@ -81,7 +81,7 @@ namespace Application
         {
             bool allDone = !elements.Any(element => element.IsDone() == false);
 
-            if(allDone)
+            if (allDone)
             {
                 Console.WriteLine(string.Format(InfoFormatString, "All elements is marked as done."));
             }

@@ -47,5 +47,4 @@ namespace Application
         /// <returns>Returns array of all elements in list</returns>
         ITodoElement[] GetTodoElements();
     }
-
 }

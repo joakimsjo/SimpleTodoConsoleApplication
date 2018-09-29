@@ -11,7 +11,7 @@ namespace Application
             Console.WriteLine("Type 'Quit' to exit the application");
             Todo app = new Todo(new TodoList());
 
-            while(true) 
+            while (true) 
             {
                 Console.Write(">");
                 string command = Console.ReadLine();

@@ -46,7 +46,7 @@ namespace Tests
         {
             var todo = new Todo(new TodoList());
 
-            foreach(string action in actions)
+            foreach (string action in actions)
             {
                 todo.DoAction(action);
             }
@@ -93,7 +93,7 @@ namespace Tests
         {
             var todo = new Todo(new TodoList());
             
-            for(int i = 0; i < numElements; i++)
+            for (int i = 0; i < numElements; i++)
             {
                 todo.DoAction(action);
             }
@@ -110,12 +110,12 @@ namespace Tests
         {
             var todo = new Todo(new TodoList());
             
-            for(int i = 0; i < numElements; i++)
+            for (int i = 0; i < numElements; i++)
             {
                 todo.DoAction(action);
             }
 
-            foreach(string doAction in doActions)
+            foreach (string doAction in doActions)
             {
                 todo.DoAction(doAction);
             }
@@ -123,7 +123,7 @@ namespace Tests
             var elements = todo._list.GetTodoElements();
             int markedDone = 0;
             
-            for(int i = 0; i < numElements; i++)
+            for (int i = 0; i < numElements; i++)
             {
                 if (elements[i].IsDone())
                 {
@@ -142,12 +142,12 @@ namespace Tests
         {
             var todo = new Todo(new TodoList());
             
-            for(int i = 0; i < numElements; i++)
+            for (int i = 0; i < numElements; i++)
             {
                 todo.DoAction(action);
             }
 
-            foreach(string doAction in doActions)
+            foreach (string doAction in doActions)
             {
                 todo.DoAction(doAction);
             }
@@ -158,7 +158,7 @@ namespace Tests
             var reloadedElements = todo._list.GetTodoElements();
             
             Assert.AreEqual(elements.Length, reloadedElements.Length);
-            for(int i = 0; i < numElements; i++) 
+            for (int i = 0; i < numElements; i++) 
             {
                 Assert.AreEqual(elements[0].GetDescription(), reloadedElements[0].GetDescription());
                 Assert.AreEqual(elements[0].IsDone(), reloadedElements[0].IsDone());
