@@ -51,9 +51,14 @@ namespace Application
                 return;
             }   
 
-            if (id > elements.Count || id == 0)
+            if (id > elements.Count)
             {
                 Console.WriteLine(string.Format(InfoFormatString, $"Id {id} is not in list."));
+                return;
+            }
+            else if (id <= 0)
+            {
+                Console.WriteLine(string.Format(InfoFormatString, $"Id {id} is not a valid id."));
                 return;
             }
 
