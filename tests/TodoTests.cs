@@ -1,6 +1,6 @@
 using System;
 using NUnit.Framework;
-using application;
+using Application;
 using System.IO;
 
 namespace Tests
@@ -35,6 +35,21 @@ namespace Tests
             var todo = new Todo(new TodoList());
 
             todo.DoAction(action);
+
+            Assert.NotNull(todo);
+            Assert.AreEqual(0, todo._list.GetSize());
+        }
+
+        [Test]
+        [TestCase(new object[] {"Add \"\"", "Add \"", "Add '", "Add ''"})]
+        public void TodoTestAddVerbShouldNotAddEmptyDescriptionString(object[] actions)
+        {
+            var todo = new Todo(new TodoList());
+
+            foreach(string action in actions)
+            {
+                todo.DoAction(action);
+            }
 
             Assert.NotNull(todo);
             Assert.AreEqual(0, todo._list.GetSize());
@@ -90,8 +105,8 @@ namespace Tests
         }
 
         [Test]
-        [TestCase("Add someTodoListElement", 10, new string[] {"Do #0", "Do #4", "Do #5"})]
-        public void TodoAddElementsMarkSomeDone(string action, int numElements, string[] doActions)
+        [TestCase("Add someTodoListElement", 10, new object[] {"Do #0", "Do #4", "Do #5"})]
+        public void TodoAddElementsMarkSomeDone(string action, int numElements, object[] doActions)
         {
             var todo = new Todo(new TodoList());
             

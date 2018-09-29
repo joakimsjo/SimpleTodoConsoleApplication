@@ -1,6 +1,6 @@
 using System;
 using NUnit.Framework;
-using application;
+using Application;
 using System.IO;
 
 namespace Tests
