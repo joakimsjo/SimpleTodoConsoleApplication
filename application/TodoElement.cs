@@ -2,7 +2,7 @@ using System;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
-namespace application
+namespace Application
 {
     public class TodoElement : ITodoElement
     {
@@ -60,8 +60,8 @@ namespace application
 
         public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
         {
-            JObject TodoObject = JObject.Load(reader);
-            return new TodoElement(TodoObject["_id"].Value<int>(), TodoObject["_description"].Value<string>(), TodoObject["_done"].Value<bool>());
+            JObject todoObject = JObject.Load(reader);
+            return new TodoElement(todoObject["_id"].Value<int>(), todoObject["_description"].Value<string>(), todoObject["_done"].Value<bool>());
         }
 
         public override bool CanWrite

@@ -1,6 +1,6 @@
 using System;
 
-namespace application 
+namespace Application 
 {
     /// <summary>
     /// A todo class.
