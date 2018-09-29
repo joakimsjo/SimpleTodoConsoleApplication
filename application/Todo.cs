@@ -13,6 +13,7 @@ namespace Application
                                             + "To exit the application type:\nQuit";
         private readonly string InfoFormatString = "INFO: {0}";
         private static List<string> ActionVerbs = new List<string>(new string[] {"ADD", "DO"});
+        private static List<string> IncompleteDescription = new List<string>(new string[] {"\"\"", "''", "\"", "'"}); 
 
         public Todo(ITodoList list)
         {
@@ -28,6 +29,12 @@ namespace Application
             if (ActionVerbs.Contains(verb) && (args.Length < 2 || args[1].Trim().Length < 1)) 
             {
                 Console.WriteLine(string.Format(InfoFormatString, $"{verb} is missing second argument."));
+                return;
+            }
+
+            if(ActionVerbs.Contains(verb) && IncompleteDescription.Contains(args[1]))
+            {
+                Console.WriteLine(string.Format(InfoFormatString, $"{args[1]} is a incomplete description."));
                 return;
             }
 
