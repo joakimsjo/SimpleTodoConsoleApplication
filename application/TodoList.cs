@@ -27,7 +27,7 @@ namespace Application
 
         public void AddElement(string description)
         {
-            int id = elements.Count;
+            int id = elements.Count + 1;
             ITodoElement newTodo = new TodoElement(id, description);
 
             elements.Add(newTodo);
@@ -51,13 +51,13 @@ namespace Application
                 return;
             }   
 
-            if (id > elements.Count)
+            if (id > elements.Count || id == 0)
             {
-                Console.WriteLine(string.Format(InfoFormatString, "Id is not in list."));
+                Console.WriteLine(string.Format(InfoFormatString, $"Id {id} is not in list."));
                 return;
             }
 
-            ITodoElement elementToComplete = elements[id];
+            ITodoElement elementToComplete = elements[id-1];
 
             if (elementToComplete.IsDone())
             {

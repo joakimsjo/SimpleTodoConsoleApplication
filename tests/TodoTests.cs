@@ -56,7 +56,7 @@ namespace Tests
         }
 
         [Test]
-        [TestCase("Add someTodoListElement", "Do #0")]
+        [TestCase("Add someTodoListElement", "Do #1")]
         public void TodoTestDoVerb(string addAction, string doAction)
         {
             var todo = new Todo(new TodoList());
@@ -105,7 +105,7 @@ namespace Tests
         }
 
         [Test]
-        [TestCase("Add someTodoListElement", 10, new object[] {"Do #0", "Do #4", "Do #5"})]
+        [TestCase("Add someTodoListElement", 10, new object[] {"Do #1", "Do #4", "Do #5"})]
         public void TodoAddElementsMarkSomeDone(string action, int numElements, object[] doActions)
         {
             var todo = new Todo(new TodoList());

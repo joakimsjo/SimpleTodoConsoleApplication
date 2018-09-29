@@ -43,7 +43,7 @@ namespace Tests
         }
 
         [Test]
-        [TestCase("someTodoListItem", "0")]
+        [TestCase("someTodoListItem", "1")]
         public void TodoListMarkDone(string description, string id)
         {
             var list = new TodoList();
@@ -85,7 +85,7 @@ namespace Tests
                 list.AddElement(description);
             }
             
-            for(int i = 0; i < shouldBeMarkedDone; i++)
+            for(int i = 1; i <= shouldBeMarkedDone; i++)
             {
                 list.DoElement(i.ToString());
             }
