@@ -4,7 +4,7 @@ namespace application
 {
     /// <summary>
     /// A todo list.
-    /// Has todo elemens.
+    /// Has todo elements.
     /// </summary>
     public interface ITodoList 
     {
@@ -21,15 +21,15 @@ namespace application
         void DoElement(string id);
 
         /// <summary>
-        /// Returns the number of todos in list
-        /// </summary>
-        /// <returns>Returns size of list.</returns>
-        int GetSize();
-
-        /// <summary>
         /// Prints todo elemens that is not marked as done
         /// </summary>
         void PrintElements();
+
+        /// <summary>
+        /// Returns the number of todos in list
+        /// </summary>
+        /// <returns>Returns size of list</returns>
+        int GetSize();
 
         /// <summary>
         /// Saves the list of todo elements to a JSON file
@@ -45,7 +45,6 @@ namespace application
         /// Returns an array of all Todo elements in list
         /// </summary>
         /// <returns>Returns array of all elements in list</returns>
-
         ITodoElement[] GetTodoElements();
     }
 

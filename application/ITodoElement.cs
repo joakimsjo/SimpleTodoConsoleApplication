@@ -21,7 +21,7 @@ namespace application
         /// <summary>
         /// Indicates if a element is completed
         /// </summary>
-        /// <returns>Returns boolean indicating if element is done</returns>
+        /// <returns>Returns boolean indicating if element is marked as done</returns>
         bool IsDone();
     }
 }

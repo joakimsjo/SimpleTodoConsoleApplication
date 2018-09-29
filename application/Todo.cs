@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace application
+namespace Application
 {
     public class Todo : ITodo
     {
@@ -23,15 +23,15 @@ namespace application
         {
             string[] args = action.Split(" ", 2);
 
-            string Verb = args[0].ToUpper();
+            string verb = args[0].ToUpper();
             
-            if (ActionVerbs.Contains(Verb) && (args.Length < 2 || args[1].Trim().Length < 1)) 
+            if (ActionVerbs.Contains(verb) && (args.Length < 2 || args[1].Trim().Length < 1)) 
             {
-                Console.WriteLine(string.Format(InfoFormatString, $"{Verb} is missing second argument."));
+                Console.WriteLine(string.Format(InfoFormatString, $"{verb} is missing second argument."));
                 return;
             }
 
-            switch (Verb)
+            switch (verb)
             {
                 case "ADD":
                     _list.AddElement(args[1]);

@@ -10,7 +10,7 @@ namespace application
         /// <summary>
         /// Performes an action on the ToDoList
         /// </summary>
-        /// <param name="action"> Description of what action be done</param>
+        /// <param name="action"> Description of what action to be executed</param>
         void DoAction(string action);
     }
 }
